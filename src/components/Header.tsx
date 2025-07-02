@@ -1,13 +1,15 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Bell, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AuthButtons from './AuthButtons';
+import PSLogo from './PSLogo';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const navigation = [
     { name: 'Browse Artists', href: '/artists' },
@@ -25,15 +27,13 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200/50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-2 rounded-lg mr-3">
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-              </svg>
+          <Link to="/" className="flex items-center group">
+            <div className="mr-3 transition-transform group-hover:scale-105">
+              <PSLogo size={40} />
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
               ArtistNexus
@@ -46,9 +46,10 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
+                className="relative text-gray-700 hover:text-purple-600 transition-all duration-300 font-medium group"
               >
                 {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
             
@@ -59,16 +60,16 @@ const Header = () => {
                 className="flex items-center text-gray-700 hover:text-purple-600 transition-colors font-medium"
               >
                 More
-                <ChevronDown className="ml-1 h-4 w-4" />
+                <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 animate-in slide-in-from-top-2">
                   {moreLinks.map((item) => (
                     <Link
                       key={item.name}
                       to={item.href}
-                      className="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors"
+                      className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 hover:text-purple-600 transition-all duration-200 rounded-lg mx-2"
                       onClick={() => setIsDropdownOpen(false)}
                     >
                       {item.name}
@@ -79,45 +80,90 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Desktop Auth Buttons */}
-          <div className="hidden lg:flex">
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {/* Search Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="relative hover:bg-purple-50 hover:text-purple-600 transition-colors"
+            >
+              <Search className="h-5 w-5" />
+            </Button>
+
+            {/* Notifications */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="relative hover:bg-purple-50 hover:text-purple-600 transition-colors"
+            >
+              <Bell className="h-5 w-5" />
+              <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full flex items-center justify-center">
+                <span className="text-[10px] text-white font-bold">3</span>
+              </span>
+            </Button>
+
             <AuthButtons />
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center space-x-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hover:bg-purple-50 hover:text-purple-600"
+            >
+              <Search className="h-5 w-5" />
+            </Button>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="hover:bg-purple-50 hover:text-purple-600"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
 
+        {/* Search Bar */}
+        {isSearchOpen && (
+          <div className="pb-4 animate-in slide-in-from-top-2">
+            <div className="relative max-w-md mx-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search artists, categories, locations..."
+                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/80 backdrop-blur-sm"
+                autoFocus
+              />
+            </div>
+          </div>
+        )}
+
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200 rounded-b-lg shadow-lg">
+          <div className="lg:hidden animate-in slide-in-from-top-5">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-md border-t border-gray-200 rounded-b-xl shadow-lg">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-all"
+                  className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 transition-all duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
               
-              <div className="border-t border-gray-200 pt-2">
-                <p className="px-3 py-2 text-sm font-semibold text-gray-500 uppercase tracking-wider">More</p>
+              <div className="border-t border-gray-200 pt-2 mt-2">
+                <p className="px-4 py-2 text-sm font-semibold text-gray-500 uppercase tracking-wider">More</p>
                 {moreLinks.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-all"
+                    className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 transition-all duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
@@ -125,7 +171,14 @@ const Header = () => {
                 ))}
               </div>
               
-              <div className="pt-4 border-t border-gray-200">
+              <div className="pt-4 border-t border-gray-200 space-y-2">
+                <div className="flex items-center justify-between px-4 py-2">
+                  <span className="text-sm font-medium text-gray-600">Notifications</span>
+                  <div className="relative">
+                    <Bell className="h-5 w-5 text-gray-400" />
+                    <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full"></span>
+                  </div>
+                </div>
                 <AuthButtons />
               </div>
             </div>
@@ -136,7 +189,7 @@ const Header = () => {
       {/* Backdrop for mobile menu */}
       {isMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-25 lg:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
       )}
