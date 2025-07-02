@@ -11,8 +11,8 @@ const Header = () => {
   const navigation = [
     { name: 'Browse Artists', href: '/artists' },
     { name: 'Join as Artist', href: '/onboarding' },
-    { name: 'How it Works', href: '#how-it-works' },
-    { name: 'About', href: '#about' },
+    { name: 'How it Works', href: '/how-it-works' },
+    { name: 'About', href: '/about' },
   ];
 
   return (

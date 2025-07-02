@@ -143,7 +143,7 @@ const Index = () => {
                 </div>
                 <span className="text-2xl font-bold">ArtistNexus</span>
               </div>
-              <p className="text-gray-400">
+              <p className="text-gray-400 mb-4">
                 Connecting amazing artists with unforgettable events.
               </p>
             </div>
@@ -153,7 +153,8 @@ const Index = () => {
               <ul className="space-y-2 text-gray-400">
                 <li><Link to="/artists" className="hover:text-white transition-colors">Browse Artists</Link></li>
                 <li><Link to="/register" className="hover:text-white transition-colors">Sign Up</Link></li>
-                <li><a href="#" className="hover:text-white transition-colors">How it Works</a></li>
+                <li><Link to="/how-it-works" className="hover:text-white transition-colors">How it Works</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
               </ul>
             </div>
             
@@ -162,22 +163,24 @@ const Index = () => {
               <ul className="space-y-2 text-gray-400">
                 <li><Link to="/onboarding" className="hover:text-white transition-colors">Join as Artist</Link></li>
                 <li><Link to="/login" className="hover:text-white transition-colors">Artist Login</Link></li>
-                <li><a href="#" className="hover:text-white transition-colors">Success Stories</a></li>
+                <li><Link to="/success-stories" className="hover:text-white transition-colors">Success Stories</Link></li>
               </ul>
             </div>
             
             <div>
               <h3 className="text-lg font-semibold mb-4">Support</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><Link to="/help-center" className="hover:text-white transition-colors">Help Center</Link></li>
+                <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
               </ul>
             </div>
           </div>
           
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 ArtistNexus. All rights reserved.</p>
+            <p>&copy; 2025 ArtistNexus. All rights reserved.</p>
+            <p className="mt-2 text-sm">Developed by <span className="text-purple-400 font-medium">Er Pradeep Sahani</span></p>
           </div>
         </div>
       </footer>
