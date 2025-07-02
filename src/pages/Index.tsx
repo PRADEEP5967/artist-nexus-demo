@@ -7,35 +7,9 @@ import CategoryCard from '@/components/CategoryCard';
 import { Button } from '@/components/ui/button';
 import { Star, Award, Shield, Clock, Heart, Users, Calendar, Trophy } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { artistCategories } from '@/data/mockData';
 
 const Index = () => {
-  const categories = [
-    {
-      title: "Musicians",
-      description: "Professional singers, bands, and instrumentalists",
-      icon: "🎵",
-      count: "500+"
-    },
-    {
-      title: "Dancers",
-      description: "Classical, contemporary, and cultural dance performers",
-      icon: "💃",
-      count: "300+"
-    },
-    {
-      title: "Speakers",
-      description: "Motivational speakers and industry experts",
-      icon: "🎤",
-      count: "200+"
-    },
-    {
-      title: "DJs",
-      description: "Professional DJs for all types of events",
-      icon: "🎧",
-      count: "150+"
-    }
-  ];
-
   const topIndianArtists = [
     {
       name: "Raghav Sharma",
@@ -135,7 +109,7 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {categories.map((category, index) => (
+            {artistCategories.map((category, index) => (
               <CategoryCard key={index} {...category} />
             ))}
           </div>
