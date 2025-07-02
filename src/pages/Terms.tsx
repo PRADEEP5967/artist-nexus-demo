@@ -1,6 +1,6 @@
-
 import React from 'react';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { Scale, Shield, Users, AlertCircle } from 'lucide-react';
 
 const Terms = () => {
@@ -144,15 +144,22 @@ const Terms = () => {
 
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Contact Information</h3>
-                  <p className="text-gray-600">
-                    If you have any questions about these Terms of Service, please contact us at support@artistnexus.com.
-                  </p>
+                  <div className="text-gray-600">
+                    <p className="mb-4">If you have any questions about these Terms of Service, please contact us:</p>
+                    <ul className="space-y-2">
+                      <li><strong>Email:</strong> pradeepsahani8130s@gmail.com</li>
+                      <li><strong>Phone:</strong> +91 8130885013</li>
+                      <li><strong>Address:</strong> Delhi, India</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

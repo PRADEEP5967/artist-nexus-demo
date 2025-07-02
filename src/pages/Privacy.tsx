@@ -1,6 +1,6 @@
-
 import React from 'react';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { Shield, Eye, Lock, Database, UserCheck } from 'lucide-react';
 
 const Privacy = () => {
@@ -179,9 +179,9 @@ const Privacy = () => {
                   <div className="text-gray-600">
                     <p className="mb-4">If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
                     <ul className="space-y-2">
-                      <li><strong>Email:</strong> privacy@artistnexus.com</li>
-                      <li><strong>Phone:</strong> +1 (555) 123-4567</li>
-                      <li><strong>Address:</strong> 123 Artist Street, Creative District, NY 10001</li>
+                      <li><strong>Email:</strong> pradeepsahani8130s@gmail.com</li>
+                      <li><strong>Phone:</strong> +91 8130885013</li>
+                      <li><strong>Address:</strong> Delhi, India</li>
                     </ul>
                   </div>
                 </div>
@@ -190,6 +190,8 @@ const Privacy = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

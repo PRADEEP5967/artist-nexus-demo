@@ -1,130 +1,240 @@
 
 import React from 'react';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import CategoryCard from '@/components/CategoryCard';
-import { artistCategories } from '@/data/mockData';
-import { Music, Users, Mic, Headphones, Shield, Clock, Star, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Star, Award, Shield, Clock, Heart, Users, Calendar, Trophy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const categoryIcons = {
-  musician: <Music className="h-6 w-6 text-white" />,
-  dancer: <Users className="h-6 w-6 text-white" />,
-  speaker: <Mic className="h-6 w-6 text-white" />,
-  dj: <Headphones className="h-6 w-6 text-white" />
-};
-
 const Index = () => {
+  const categories = [
+    {
+      title: "Musicians",
+      description: "Professional singers, bands, and instrumentalists",
+      icon: "🎵",
+      count: "500+"
+    },
+    {
+      title: "Dancers",
+      description: "Classical, contemporary, and cultural dance performers",
+      icon: "💃",
+      count: "300+"
+    },
+    {
+      title: "Speakers",
+      description: "Motivational speakers and industry experts",
+      icon: "🎤",
+      count: "200+"
+    },
+    {
+      title: "DJs",
+      description: "Professional DJs for all types of events",
+      icon: "🎧",
+      count: "150+"
+    }
+  ];
+
+  const topIndianArtists = [
+    {
+      name: "Raghav Sharma",
+      category: "Classical Vocalist",
+      location: "Mumbai, India",
+      rating: 4.9,
+      bookings: 120,
+      image: "/placeholder.svg"
+    },
+    {
+      name: "Priya Nair",
+      category: "Bharatanatyam Dancer",
+      location: "Chennai, India",
+      rating: 5.0,
+      bookings: 95,
+      image: "/placeholder.svg"
+    },
+    {
+      name: "Arjun Kapoor",
+      category: "Bollywood DJ",
+      location: "Delhi, India",
+      rating: 4.8,
+      bookings: 150,
+      image: "/placeholder.svg"
+    },
+    {
+      name: "Kavita Desai",
+      category: "Motivational Speaker",
+      location: "Bangalore, India",
+      rating: 4.9,
+      bookings: 80,
+      image: "/placeholder.svg"
+    }
+  ];
+
+  const stats = [
+    { number: "5,000+", label: "Verified Artists", icon: Users },
+    { number: "15,000+", label: "Successful Events", icon: Calendar },
+    { number: "98%", label: "Client Satisfaction", icon: Heart },
+    { number: "50+", label: "Cities Covered", icon: Trophy }
+  ];
+
+  const features = [
+    {
+      icon: Shield,
+      title: "Quality Guarantee",
+      description: "All artists are verified and rated by previous clients"
+    },
+    {
+      icon: Clock,
+      title: "Quick Booking",
+      description: "Book your perfect artist in just a few clicks"
+    },
+    {
+      icon: Award,
+      title: "Top Rated Artists",
+      description: "Access to India's most talented and professional artists"
+    },
+    {
+      icon: Heart,
+      title: "Customer Support",
+      description: "24/7 support to ensure your event is perfect"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      <HeroSection />
       
+      <HeroSection />
+
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center animate-fade-in">
+                <div className="bg-gradient-to-r from-purple-600 to-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="h-8 w-8 text-white" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
+                <div className="text-gray-600">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Categories Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Discover Talented Artists
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Browse our curated selection of professional artists across different categories. 
-              Find the perfect match for your next event.
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Find Artists by Category</h2>
+            <p className="text-xl text-gray-600">
+              Discover talented performers across various categories for your perfect event
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {artistCategories.map((category) => (
-              <div key={category.category} className="animate-fade-in">
-                <CategoryCard
-                  title={category.title}
-                  description={category.description}
-                  icon={categoryIcons[category.category as keyof typeof categoryIcons]}
-                  artistCount={category.artistCount}
-                  imageUrl={category.imageUrl}
-                  category={category.category}
-                />
-              </div>
+            {categories.map((category, index) => (
+              <CategoryCard key={index} {...category} />
             ))}
-          </div>
-
-          {/* CTA Section */}
-          <div className="text-center mt-16">
-            <Link to="/artists">
-              <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105">
-                Browse All Artists
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* Quality Guarantee Section */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
+      {/* Top Rated Indian Artists Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why Choose ArtistNexus?
+              Top Rated <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Indian Artists</span>
             </h2>
             <p className="text-xl text-gray-600">
-              The easiest way to book talented artists for your events
+              Meet some of India's most talented and highly-rated artists
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 group">
-              <div className="bg-gradient-to-r from-purple-600 to-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Shield className="h-8 w-8 text-white" />
+            {topIndianArtists.map((artist, index) => (
+              <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                <div className="relative">
+                  <div className="w-full h-48 bg-gradient-to-r from-purple-400 to-blue-400 flex items-center justify-center">
+                    <span className="text-white text-4xl font-bold">
+                      {artist.name.split(' ').map(n => n[0]).join('')}
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4 bg-white rounded-full px-2 py-1 flex items-center space-x-1">
+                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                    <span className="text-sm font-bold">{artist.rating}</span>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{artist.name}</h3>
+                  <p className="text-purple-600 font-medium mb-2">{artist.category}</p>
+                  <p className="text-gray-600 text-sm mb-4">{artist.location}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-500">{artist.bookings} bookings</span>
+                    <Button size="sm" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                      View Profile
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Verified Artists</h3>
-              <p className="text-gray-600">All our artists are thoroughly vetted and verified to ensure the highest quality performances.</p>
-            </div>
+            ))}
+          </div>
 
-            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 group">
-              <div className="bg-gradient-to-r from-purple-600 to-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Clock className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Easy Booking</h3>
-              <p className="text-gray-600">Simple and secure booking process with instant quotes and seamless communication.</p>
-            </div>
-
-            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 group">
-              <div className="bg-gradient-to-r from-purple-600 to-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Star className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Quality Guarantee</h3>
-              <p className="text-gray-600">Satisfaction guaranteed with our 5-star rated artists and comprehensive event support.</p>
-            </div>
-
-            <div className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 group">
-              <div className="bg-gradient-to-r from-purple-600 to-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Award className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Premium Experience</h3>
-              <p className="text-gray-600">Professional artists with proven track records and excellent customer reviews.</p>
-            </div>
+          <div className="text-center mt-12">
+            <Link to="/artists">
+              <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-8 py-4 text-lg font-semibold rounded-xl">
+                View All Artists
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Call-to-Action Banner */}
+      {/* Features Section */}
+      <section className="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose ArtistNexus?</h2>
+            <p className="text-xl text-gray-600">
+              We make it easy to find and book the perfect artist for your event
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="bg-gradient-to-r from-purple-600 to-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <feature.icon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-purple-600 to-blue-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Book Your Perfect Artist?
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Ready to Find Your Perfect Artist?
           </h2>
           <p className="text-xl text-purple-100 mb-8">
-            Join thousands of satisfied customers who found their ideal performers through ArtistNexus
+            Join thousands of satisfied clients who found amazing artists through ArtistNexus
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/artists">
-              <Button className="bg-white text-purple-600 hover:bg-purple-50 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                Find Artists Now
+              <Button className="bg-white text-purple-600 hover:bg-purple-50 px-8 py-4 text-lg font-semibold rounded-xl transition-all hover:scale-105">
+                Browse Artists Now
               </Button>
             </Link>
-            <Link to="/register">
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105">
+            <Link to="/onboarding">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all hover:scale-105">
                 Join as Artist
               </Button>
             </Link>
@@ -132,58 +242,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center mb-4">
-                <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-2 rounded-lg mr-3">
-                  <Music className="h-6 w-6" />
-                </div>
-                <span className="text-2xl font-bold">ArtistNexus</span>
-              </div>
-              <p className="text-gray-400 mb-4">
-                Connecting amazing artists with unforgettable events.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">For Clients</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link to="/artists" className="hover:text-white transition-colors">Browse Artists</Link></li>
-                <li><Link to="/register" className="hover:text-white transition-colors">Sign Up</Link></li>
-                <li><Link to="/how-it-works" className="hover:text-white transition-colors">How it Works</Link></li>
-                <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">For Artists</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link to="/onboarding" className="hover:text-white transition-colors">Join as Artist</Link></li>
-                <li><Link to="/login" className="hover:text-white transition-colors">Artist Login</Link></li>
-                <li><Link to="/success-stories" className="hover:text-white transition-colors">Success Stories</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Support</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link to="/help-center" className="hover:text-white transition-colors">Help Center</Link></li>
-                <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
-                <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 ArtistNexus. All rights reserved.</p>
-            <p className="mt-2 text-sm">Developed by <span className="text-purple-400 font-medium">Er Pradeep Sahani</span></p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
