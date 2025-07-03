@@ -10,6 +10,7 @@ import TopArtistsSection from '@/components/sections/TopArtistsSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
 import FeaturesSection from '@/components/sections/FeaturesSection';
 import CTASection from '@/components/sections/CTASection';
+import FeaturedArtistsCarousel from '@/components/sections/FeaturedArtistsCarousel';
 
 const Index = () => {
   const handleSearch = (query: string, location: string, date: string) => {
@@ -24,6 +25,7 @@ const Index = () => {
       <LiveEventsCounter />
       <StatsSection />
       <CategoriesSection />
+      <FeaturedArtistsCarousel />
       <TopArtistsSection />
       <TestimonialsSection />
       <FeaturesSection />
