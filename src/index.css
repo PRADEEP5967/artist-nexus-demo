@@ -96,11 +96,52 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Improved link and button focus styles */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid hsl(262.1 83.3% 57.8%);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
-/* Custom animations */
+/* Enhanced mobile navigation and touch targets */
 @layer utilities {
+  .mobile-menu-item {
+    @apply min-h-[44px] flex items-center px-4 py-3 text-base font-medium transition-all duration-200;
+    @apply text-gray-700 hover:text-purple-600 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50;
+    @apply rounded-xl cursor-pointer select-none;
+  }
+
+  .desktop-nav-item {
+    @apply relative px-3 py-2 text-gray-700 hover:text-purple-600 transition-all duration-300 font-medium;
+    @apply rounded-lg cursor-pointer select-none;
+  }
+
+  .nav-underline {
+    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600;
+    @apply transition-all duration-300 group-hover:w-full;
+  }
+
+  /* Better dropdown styling */
+  .dropdown-menu {
+    @apply absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50;
+    @apply animate-in slide-in-from-top-2 duration-200;
+  }
+
+  .dropdown-item {
+    @apply block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50;
+    @apply hover:text-purple-600 transition-all duration-200 rounded-lg mx-2 cursor-pointer;
+  }
+
+  /* Enhanced animations */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out;
   }
@@ -113,6 +154,7 @@ All colors MUST be HSL.
     animation: slideUp 0.4s ease-out;
   }
   
+  /* Text utilities */
   .line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
@@ -127,7 +169,7 @@ All colors MUST be HSL.
     -webkit-line-clamp: 2;
   }
   
-  /* Enhanced responsive utilities */
+  /* Responsive utilities */
   .container-responsive {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
@@ -147,6 +189,11 @@ All colors MUST be HSL.
   
   .card-padding {
     @apply p-4 sm:p-6 lg:p-8;
+  }
+
+  /* Fixed header spacing */
+  .header-height {
+    @apply pt-16 sm:pt-20 lg:pt-24;
   }
 }
 
@@ -189,24 +236,17 @@ All colors MUST be HSL.
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: hsl(210 40% 96.1%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: hsl(215.4 16.3% 46.9%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
-/* Smooth focus transitions */
-input:focus,
-textarea:focus,
-select:focus {
-  transition: all 0.2s ease-in-out;
+  background: hsl(262.1 83.3% 57.8%);
 }
 
 /* Enhanced card hover effects */
@@ -219,7 +259,7 @@ select:focus {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Mobile-first responsive design improvements */
+/* Mobile-first responsive improvements */
 @media (max-width: 640px) {
   .mobile-full {
     width: 100vw;
@@ -236,6 +276,22 @@ select:focus {
   
   .mobile-spacing {
     margin-bottom: 1rem;
+  }
+
+  /* Better touch targets */
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    min-height: 44px;
+  }
+
+  /* Prevent zoom on input focus */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
   }
 }
 
@@ -259,6 +315,11 @@ select:focus {
   .desktop-hover-scale:hover {
     transform: scale(1.02);
   }
+}
+
+/* Navigation menu specific styles */
+.navigation-menu-content {
+  @apply bg-white/95 backdrop-blur-md border border-gray-200/50 shadow-lg;
 }
 
 /* Print styles */
@@ -287,32 +348,32 @@ select:focus {
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .bg-gradient-to-r {
-    background: #000 !important;
-    color: #fff !important;
+    background: hsl(0 0% 0%) !important;
+    color: hsl(0 0% 100%) !important;
   }
   
   .text-gray-600 {
-    color: #000 !important;
+    color: hsl(0 0% 0%) !important;
   }
 }
 
-/* Focus styles for accessibility */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid #7c3aed;
-  outline-offset: 2px;
+/* Better focus management */
+.focus-trap {
+  @apply outline-none ring-2 ring-purple-500 ring-offset-2;
 }
 
-/* Better touch targets for mobile */
-@media (max-width: 640px) {
-  button,
-  a,
-  input,
-  textarea,
-  select {
-    min-height: 44px;
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }

@@ -11,7 +11,7 @@ const NotFound = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
       
-      <div className="flex-1 flex items-center justify-center pt-20">
+      <div className="flex-1 flex items-center justify-center header-height">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* 404 Animation */}
           <div className="mb-8">
