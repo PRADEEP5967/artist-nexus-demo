@@ -25,7 +25,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
     { name: 'Privacy', href: '/privacy' },
   ];
 
-  if (!isMenuOpen) return null;
+  if (!isOpen) return null;
 
   return (
     <>
