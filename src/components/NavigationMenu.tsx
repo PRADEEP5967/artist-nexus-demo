@@ -51,7 +51,7 @@ const MainNavigationMenu = () => {
 
         {/* Join as Artist */}
         <NavigationMenuItem>
-          <Link to="/onboarding">
+          <Link to="/artist-onboarding">
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Join as Artist
             </NavigationMenuLink>

@@ -46,7 +46,7 @@ const Register = () => {
       });
       
       if (userType === 'artist') {
-        navigate('/onboarding');
+        navigate('/artist-onboarding');
       } else {
         navigate('/dashboard');
       }

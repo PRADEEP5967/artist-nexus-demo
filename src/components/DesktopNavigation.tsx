@@ -8,7 +8,7 @@ const DesktopNavigation: React.FC = () => {
 
   const navigation = [
     { name: 'Browse Artists', href: '/artists' },
-    { name: 'Join as Artist', href: '/onboarding' },
+    { name: 'Join as Artist', href: '/artist-onboarding' },
     { name: 'How it Works', href: '/how-it-works' },
     { name: 'Success Stories', href: '/success-stories' },
     { name: 'About', href: '/about' },
