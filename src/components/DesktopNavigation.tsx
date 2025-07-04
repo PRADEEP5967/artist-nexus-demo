@@ -35,15 +35,15 @@ const DesktopNavigation: React.FC = () => {
   }, []);
 
   return (
-    <div className="hidden lg:flex items-center space-x-6">
+    <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
       {navigation.map((item) => (
         <Link
           key={item.name}
           to={item.href}
-          className="relative text-gray-700 hover:text-purple-600 transition-all duration-300 font-medium group px-2 py-1"
+          className="desktop-nav-item group relative px-3 py-2 text-sm xl:text-base font-medium text-gray-700 hover:text-purple-600 transition-all duration-300 rounded-lg"
         >
           {item.name}
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
+          <span className="nav-underline"></span>
         </Link>
       ))}
       
@@ -51,19 +51,19 @@ const DesktopNavigation: React.FC = () => {
       <div className="relative" data-dropdown>
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className="flex items-center text-gray-700 hover:text-purple-600 transition-colors font-medium px-2 py-1"
+          className="desktop-nav-item group flex items-center px-3 py-2 text-sm xl:text-base font-medium text-gray-700 hover:text-purple-600 transition-colors rounded-lg"
         >
           More
-          <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
         </button>
         
         {isDropdownOpen && (
-          <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
+          <div className="dropdown-menu">
             {moreLinks.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 hover:text-purple-600 transition-all duration-200 rounded-lg mx-2"
+                className="dropdown-item text-sm"
                 onClick={() => setIsDropdownOpen(false)}
               >
                 {item.name}
@@ -72,7 +72,7 @@ const DesktopNavigation: React.FC = () => {
           </div>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 
