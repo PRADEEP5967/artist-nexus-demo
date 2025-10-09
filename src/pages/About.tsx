@@ -1,9 +1,12 @@
 import React from 'react';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import ModernFooter from '@/components/ModernFooter';
+import { SEO } from '@/components/SEO';
 import { Users, Star, Award, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const About = () => {
   const team = [
@@ -57,43 +60,73 @@ const About = () => {
     }
   ];
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-r from-purple-600 to-blue-600">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold text-white mb-6">About Us</h1>
-          <p className="text-xl text-purple-100">
-            Learn about our mission, values, and the team behind ArtistNexus
-          </p>
-        </div>
-      </section>
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
-      {/* Story Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
-              <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                ArtistNexus was founded in 2022 with a vision to revolutionize the way artists and clients connect. We saw a need for a platform that not only showcases talent but also provides a seamless booking experience.
-              </p>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Our mission is to empower artists by providing them with the tools and resources they need to succeed, while also helping clients find the perfect talent for their events.
-              </p>
-            </div>
-            <div>
-              <img
-                src="/placeholder.svg"
-                alt="Our Story"
-                className="rounded-2xl shadow-lg"
-              />
+  return (
+    <>
+      <SEO
+        title="About Us - ArtistNexus | Our Story & Mission"
+        description="Learn about ArtistNexus, our mission to connect artists with opportunities, and the team behind India's premier artist booking platform."
+      />
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <Header />
+        
+        {/* Hero Section */}
+        <section className="pt-24 pb-12 bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-900 dark:to-blue-900">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-5xl font-bold text-white mb-6"
+            >
+              About Us
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl text-purple-100 dark:text-purple-200"
+            >
+              Learn about our mission, values, and the team behind ArtistNexus
+            </motion.p>
+          </div>
+        </section>
+
+        {/* Story Section */}
+        <section className="py-20 bg-white dark:bg-gray-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">Our Story</h2>
+                <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+                  ArtistNexus was founded in 2022 with a vision to revolutionize the way artists and clients connect. We saw a need for a platform that not only showcases talent but also provides a seamless booking experience.
+                </p>
+                <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                  Our mission is to empower artists by providing them with the tools and resources they need to succeed, while also helping clients find the perfect talent for their events.
+                </p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <img
+                  src="/placeholder.svg"
+                  alt="Our Story"
+                  className="rounded-2xl shadow-lg"
+                />
+              </motion.div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Stats Section */}
       <section className="py-16 bg-gradient-to-br from-purple-50 to-blue-50">
@@ -193,8 +226,9 @@ const About = () => {
         </div>
       </section>
 
-      <Footer />
-    </div>
+        <ModernFooter />
+      </div>
+    </>
   );
 };
 

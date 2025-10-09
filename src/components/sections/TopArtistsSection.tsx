@@ -1,8 +1,9 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Star, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const TopArtistsSection: React.FC = () => {
   const topIndianArtists = [
@@ -40,21 +41,58 @@ const TopArtistsSection: React.FC = () => {
     }
   ];
 
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0, scale: 0.95 },
+    visible: { y: 0, opacity: 1, scale: 1 },
+  };
+
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Top Rated <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Indian Artists</span>
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 dark:text-gray-300">
             Meet some of India's most talented and highly-rated artists
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {topIndianArtists.map((artist, index) => (
-            <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              transition={{ duration: 0.5 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group"
+            >
               <div className="relative">
                 <div className="w-full h-48 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 flex items-center justify-center relative overflow-hidden">
                   <div className="absolute inset-0 bg-black/20"></div>
@@ -72,22 +110,22 @@ const TopArtistsSection: React.FC = () => {
               </div>
               
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-1">{artist.name}</h3>
-                <p className="text-purple-600 font-medium mb-2">{artist.category}</p>
-                <p className="text-gray-600 text-sm mb-4 flex items-center">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{artist.name}</h3>
+                <p className="text-purple-600 dark:text-purple-400 font-medium mb-2">{artist.category}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 flex items-center">
                   <MapPin className="h-4 w-4 mr-1" />
                   {artist.location}
                 </p>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-500">{artist.bookings} bookings</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">{artist.bookings} bookings</span>
                   <Button size="sm" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 group-hover:scale-105 transition-transform">
                     View Profile
                   </Button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="text-center mt-12">
           <Link to="/artists">
