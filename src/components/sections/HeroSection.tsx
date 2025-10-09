@@ -26,14 +26,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
-      },
-    },
+    visible: { y: 0, opacity: 1 },
   };
 
   return (
@@ -95,6 +88,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
           </motion.div>
           <motion.h1
             variants={itemVariants}
+            transition={{ duration: 0.6 }}
             className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
           >
             Find Perfect
@@ -115,6 +109,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
           </motion.h1>
           <motion.p
             variants={itemVariants}
+            transition={{ duration: 0.6 }}
             className="text-xl md:text-2xl text-purple-100 dark:text-purple-200 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
             Connect with India's most talented musicians, dancers, speakers, and performers. 
@@ -122,13 +117,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
           </motion.p>
           
           {/* Enhanced Search Bar */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} transition={{ duration: 0.6 }}>
             <SearchBar onSearch={onSearch} className="mb-8" />
           </motion.div>
           
           {/* Quick Stats */}
           <motion.div
             variants={itemVariants}
+            transition={{ duration: 0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12"
           >
             {[
