@@ -8,6 +8,7 @@ import PSLogo from './PSLogo';
 import MobileMenu from './MobileMenu';
 import DesktopNavigation from './DesktopNavigation';
 import SearchComponent from './SearchComponent';
+import { ThemeToggle } from './ThemeToggle';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,7 +41,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200/50 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-3 lg:py-4">
             {/* Logo */}
@@ -62,11 +63,13 @@ const Header = () => {
             <div className="hidden lg:flex items-center space-x-3">
               <SearchComponent isOpen={isSearchOpen} onToggle={() => setIsSearchOpen(!isSearchOpen)} />
 
+              <ThemeToggle />
+
               {/* Notifications */}
               <Button
                 variant="ghost"
                 size="sm"
-                className="relative hover:bg-purple-50 hover:text-purple-600 transition-colors p-2"
+                className="relative hover:bg-purple-50 dark:hover:bg-purple-950/30 hover:text-purple-600 dark:hover:text-purple-400 transition-colors p-2"
               >
                 <Bell className="h-5 w-5" />
                 <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full flex items-center justify-center">

@@ -1,8 +1,9 @@
 
 import React from 'react';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import ModernFooter from '@/components/ModernFooter';
 import HeroSection from '@/components/sections/HeroSection';
+import { SEO } from '@/components/SEO';
 import LiveEventsCounter from '@/components/sections/LiveEventsCounter';
 import StatsSection from '@/components/sections/StatsSection';
 import CategoriesSection from '@/components/sections/CategoriesSection';
@@ -19,19 +20,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <HeroSection onSearch={handleSearch} />
-      <LiveEventsCounter />
-      <StatsSection />
-      <CategoriesSection />
-      <FeaturedArtistsCarousel />
-      <TopArtistsSection />
-      <TestimonialsSection />
-      <FeaturesSection />
-      <CTASection />
-      <Footer />
-    </div>
+    <>
+      <SEO />
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <Header />
+        <HeroSection onSearch={handleSearch} />
+        <LiveEventsCounter />
+        <StatsSection />
+        <CategoriesSection />
+        <FeaturedArtistsCarousel />
+        <TopArtistsSection />
+        <TestimonialsSection />
+        <FeaturesSection />
+        <CTASection />
+        <ModernFooter />
+      </div>
+    </>
   );
 };
 
